@@ -1,9 +1,15 @@
 
-database.py is a thin wrapper over sqlite3 that allows python scripts to
-retrieve and treat table records as dictionary objects.
+database.py is a thin wrapper over sqlite3. It allows python scripts to
+retrieve and treat table records as dictionary objects. Thus a user row
+with fields id and name, can be accessed thus
+
+conn = database.Connection()
+user = conn.get("select * from user where id=2")
+print user.id + ":" +  user.name
 
 It is derived from Tornado's MySQL adapter 
 https://github.com/facebook/tornado/blob/master/tornado/database.py
+
 It allows you to build Tornado apps that work with SQLite3
 using the same API that Tornado provides in its database module.
 
@@ -11,9 +17,8 @@ This can be useful because Sqlite comes pre-installed with python
 so it allows you to build a Test Tornado app without 
 having to install MySQL.
 
-database does not need depend on Tornado. It only needs 'sqlite3'
-which is packaged in Python 2.6. So it can be used in python apps
-independent of Tornado.
+database.py does not depend on Tornado, and can be used independent 
+of Tornado, as illustrated in demo.py
 
 To use database.py with Tornado, you can either replace tornado/database.py
 with this database.py, or place database.py in your Python path,
